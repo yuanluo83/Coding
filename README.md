@@ -1,1 +1,1 @@
-Java code for coding interview questions posted on https://leetcode.com This repository is not for commercial use. It's for my reference only.
+Java code for coding interview questions posted on https://leetcode.com This repository is not for commercial use. It's for the author's reference only.
