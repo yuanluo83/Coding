@@ -14,37 +14,35 @@ public class AddTwoNumbers {
 	 }
 	 
 	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-		if(l1==null){
-			return l2;
-        }
-		if(l2==null){
-            return l1;
-        }
-        ListNode p1=l1, p2=l2, pp1=l1, pp2=l2;
-        int carrier=0, temp=0;
+        ListNode p1=l1, p2=l2, c=p1;
+        int digits_sum=0, carrier=0;
         while(p1!=null&&p2!=null){
-            temp=p1.val+p2.val+carrier;
-            p1.val=temp % 10;
-            carrier=temp/10;
-            pp1=p1;
+            digits_sum=p1.val+p2.val+carrier;
+            carrier=digits_sum/10;
+            p1.val=digits_sum-carrier*10;
+            c=p1;
             p1=p1.next;
-            pp2=p2;
             p2=p2.next;
         }
-        if(p2!=null){
-            pp1.next=p2;
-            p1=p2;
+        while(p2!=null){
+            c.next=p2;
+            digits_sum=p2.val+carrier;
+            carrier=digits_sum/10;
+            p2.val=digits_sum-carrier*10;
+            c=p2;
+            p2=p2.next;
         }
         while(p1!=null){
-            temp=p1.val+carrier;
-            p1.val=temp % 10;
-            carrier=temp/10;
-            pp1=p1;
+            c.next=p1;
+            digits_sum=p1.val+carrier;
+            carrier=digits_sum/10;
+            p1.val=digits_sum-carrier*10;
+            c=p1;
             p1=p1.next;
         }
-        if(carrier>0){
-            ListNode extra=new ListNode(carrier);
-            pp1.next=extra;
+        if(carrier!=0){
+            ListNode newNode=new ListNode(carrier);
+            c.next=newNode;
         }
         return l1;
     }
