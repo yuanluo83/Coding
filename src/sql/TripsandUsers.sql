@@ -131,4 +131,39 @@ group by Request_at, Status
 group by grp.Request_at
 ;
 
+-- similar fast solution, but better IF statement
+select grp.Request_at, round(count(IF(grp.Status like '%cancelled%', True, NULL))/count(grp.Request_at),2) as Cancel_rate
+from
+(
+select Request_at, Status
+from Trips t
+where Request_at between '2013-10-01' and '2013-10-03'
+and (select Banned from Users u where t.Client_Id=Users_Id)='No'
+and (select Banned from Users u where t.Driver_Id=Users_Id)='No'
+) grp
+group by grp.Request_at
+;
+
+
+-- another solution
+select grp.Request_at, round(count(IF(grp.Status like '%cancelled%', True, NULL))/count(grp.Request_at),2) as Cancel_rate
+from
+(
+select Id, Request_at, Status
+from Trips t
+join
+Users u1
+on t.Client_Id=u1.Users_Id
+join Users u2
+on t.Driver_Id=u2.Users_Id
+where Request_at between '2013-10-01' and '2013-10-03'
+and u1.Banned='No' and u2.Banned='No'
+) grp
+group by grp.Request_at
+;
+
+
+
+
+
 

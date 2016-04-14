@@ -49,12 +49,22 @@ from Logs, (select @cnt:=0, @prev_num:=0) v
 where mark
 ;
 
--- Faster solution: Remove the @prev_num column from inner select. Runtime beats 88.23% of mysqlsubmissions.
+-- Faster solution: Remove the Num and @prev_num column from inner select. Runtime beats 88.23% of mysqlsubmissions.
 select distinct c.Num 
 from
 (
-select Num, @cnt := IF(@cnt=3 or Num!=@prev_num, 1, @cnt+1) as cnt, @prev_num:=Num, IF(@cnt=3, true,false) as mark
+select @cnt := IF(@cnt=3 or Num!=@prev_num, 1, @cnt+1) as cnt, @prev_num:=Num as Num, IF(@cnt=3, true,false) as mark
 from Logs, (select @cnt:=0, @prev_num:=0) v
 ) c
 where mark
+;
+
+-- similar fast solution, but less columns in the inner select
+select distinct c.Num 
+from
+(
+select @cnt := IF(Num!=@prev_num, 1, @cnt+1) as cnt, @prev_num:=Num as Num
+from Logs, (select @cnt:=0, @prev_num:=0) v
+) c
+where cnt>=3
 ;
