@@ -1,12 +1,11 @@
 package algorithms;
 
-import java.util.Set;
+import java.util.List;
 
 public class WordBreak {
 	
-	public boolean wordBreak(String s, Set<String> wordDict) {
-		
-
+	public boolean wordBreak(String s, List<String> wordDict) {
+        
         if(s==null||s.length()==0){
 			return true;
 		}
@@ -19,7 +18,7 @@ public class WordBreak {
 		check[0]=true;
 		for(int i=0;i<s.length();i++){
 			for(int j=0;j<=i;j++){
-				if(check[j]&&wordDict.contains(j>=s.length()?s.substring(i):s.substring(j,i+1))){
+				if(check[j]&&wordDict.contains(s.substring(j,i+1))){
 					check[i+1]= true;
 					break;
 				}
@@ -27,7 +26,6 @@ public class WordBreak {
 		}
 		
 		return check[s.length()];
-        
     }
 
 	public static void main(String[] args) {
