@@ -23,6 +23,8 @@ public class MaximumGap {
         	//check[i]=true;
         }
         
+        if (max-min == 0) return 0;
+        
         //Create num.length-1 bucket for num.length-2 numbers. Each bucket contains a min and max value.
         
         int bucketNum=num.length-1;
