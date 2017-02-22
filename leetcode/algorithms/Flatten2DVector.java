@@ -1,31 +1,28 @@
 package algorithms;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class Flatten2DVector {
 
 	public class Vector2D {
 
-		int p1 = 0;
-		int p2 = 0;
-		int size1 = 0;
-		List<List<Integer>> vec2d;
+		private Iterator<List<Integer>> i;
+	    private Iterator<Integer> j;
+
 	    public Vector2D(List<List<Integer>> vec2d) {
-	    	vec2d= vec2d;
-	        size1 = vec2d.size();
+	        i = vec2d.iterator();
 	    }
 
 	    public int next() {
-	        return 0;
+	        hasNext();
+	        return j.next();
 	    }
 
 	    public boolean hasNext() {
-	    	if (p1<=size1){
-	    		if(p2<=vec2d.get(p1).size()){
-	    			return true;
-	    		}
-	    	}
-	        return false;
+	        while ((j == null || !j.hasNext()) && i.hasNext())
+	            j = i.next().iterator();
+	        return j != null && j.hasNext();
 	    }
 	}
 
