@@ -40,7 +40,7 @@ public class LRUCache {
 		return value;
     }
     
-    public void set(int key, int value) {
+    public void put(int key, int value) {
     	
     	if(capacity==0){
     		return;
@@ -99,10 +99,10 @@ public class LRUCache {
 		
 		int capacity=2;
 		LRUCache cache= new LRUCache(capacity);
-		cache.set(2,1);
-		cache.set(1,1);
-		cache.set(2,3);
-		cache.set(4,1);
+		cache.put(2,1);
+		cache.put(1,1);
+		cache.put(2,3);
+		cache.put(4,1);
 		System.out.println(cache.get(1));
 		System.out.println(cache.get(2));
 		
