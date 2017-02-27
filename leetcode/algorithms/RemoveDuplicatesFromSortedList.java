@@ -28,9 +28,29 @@ public class RemoveDuplicatesFromSortedList {
         return head;
     }
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
+		int[] values= {1,2,2,3};
+    	ListNode list = null;
+    	ListNode pointer = null;
+    	RemoveDuplicatesFromSortedList obj = new RemoveDuplicatesFromSortedList();
+    	
+    	for(int i = 0; i < values.length; i++){
+    		ListNode node = obj.new ListNode(values[i]);
+    		if(list == null){
+    			list = node;
+    		}else {
+    			pointer.next = node;
+    		}
+			pointer = node;
+    	}
+    	ListNode result = obj.deleteDuplicates(list);
+    	
+    	while (result!=null){
+    		System.out.print(result.val + " -> ");
+    		result=result.next;
+    	}
+		System.out.println("null");
 	}
 
 }
