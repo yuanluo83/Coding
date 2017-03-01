@@ -24,10 +24,10 @@ public class ExpressionAddOperators {
         if (num==null || num.length()==0) {
             return result;
         }
-        String curExpression = "";
+        String curExpression = num.substring(0, 1);
         int curValue = Character.getNumericValue(num.charAt(0));
         int curPriorityValue = curValue;
-        dfs(result, num, target, 1, num.substring(0, 1), curValue, curPriorityValue, -1);
+        dfs(result, num, target, 1, curExpression, curValue, curPriorityValue, -1);
         return result;
     }
     /*
