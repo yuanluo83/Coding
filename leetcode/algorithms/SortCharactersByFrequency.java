@@ -23,16 +23,19 @@ public class SortCharactersByFrequency {
                 list.add((char) charInt);
             }
         }
-        String result = "";
+        StringBuilder sb = new StringBuilder();
         while (frequencyMap.size()!=0){
             Map.Entry<Integer,List<Character>> entry = frequencyMap.pollLastEntry();
             List<Character> list = entry.getValue();
             int frequency = entry.getKey();
+            //System.out.println(frequency);
         	for (Character ch : list) {
-        		result = result + new String(new char[frequency]).replace('\0', ch);
+        	    for (int i=0; i<=frequency-1;i++) {
+        			sb.append(ch);
+        		}
     		}
 
         }
-        return result;
+        return sb.toString();
     }
 }
