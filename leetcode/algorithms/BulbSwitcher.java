@@ -20,6 +20,7 @@ So you should return 1, because there is only one bulb is on.
 package algorithms;
 
 public class BulbSwitcher {
+	// divisor comes in pairs, expect for square numbers 
 	public int bulbSwitch(int n) {
         int i=0;
         while (i*i<=n){
