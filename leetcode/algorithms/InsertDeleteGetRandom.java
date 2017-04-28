@@ -21,7 +21,7 @@ randomSet.remove(2);
 randomSet.insert(2);
 
 // getRandom should return either 1 or 2 randomly.
-randomSet.getRandom();
+randomSet.getRandom(); 
 
 // Removes 1 from the set, returns true. Set now contains [2].
 randomSet.remove(1);
