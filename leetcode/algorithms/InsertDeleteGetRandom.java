@@ -1,6 +1,6 @@
-/* 
+/*
  * 380. Insert Delete GetRandom O(1)
-
+ 
 Design a data structure that supports all following operations in average O(1) time.
 
 insert(val): Inserts an item val to the set if not already present.
@@ -21,7 +21,7 @@ randomSet.remove(2);
 randomSet.insert(2);
 
 // getRandom should return either 1 or 2 randomly.
-randomSet.getRandom(); 
+randomSet.getRandom();
 
 // Removes 1 from the set, returns true. Set now contains [2].
 randomSet.remove(1);
@@ -52,7 +52,7 @@ public class InsertDeleteGetRandom {
 	        aList = new ArrayList<Integer>();
 	        randomno = new Random();
 	    }
-	    
+
 	    /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
 	    public boolean insert(int val) {
 	        if (hMap.containsKey(val)){
@@ -63,7 +63,7 @@ public class InsertDeleteGetRandom {
 	            return true;
 	        }
 	    }
-	    
+
 	    /** Removes a value from the set. Returns true if the set contained the specified element. */
 	    public boolean remove(int val) {
 	        if (hMap.containsKey(val)){
@@ -77,7 +77,7 @@ public class InsertDeleteGetRandom {
 	            return false;
 	        }
 	    }
-	    
+
 	    /** Get a random element from the set. */
 	    public int getRandom() {
 	        return ((Integer)aList.get(randomno.nextInt(hMap.size()))).intValue();
