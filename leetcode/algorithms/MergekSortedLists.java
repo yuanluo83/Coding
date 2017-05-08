@@ -1,7 +1,15 @@
+/*
+ * 23. Merge k Sorted Lists
+
+Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
+
+ */
+
 package algorithms;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class MergekSortedLists {
 	
@@ -16,8 +24,51 @@ public class MergekSortedLists {
 		}
 	}
 	
+	public ListNode mergeKLists(ListNode[] lists) {
+        TreeMap<Integer, ArrayList<Integer>> heap = new TreeMap<Integer, ArrayList<Integer>>();
+        // Put the first element of each list into the heap
+        for (int i=0; i<lists.length;i++){
+            ListNode node = lists[i];
+            if (node==null) {
+                continue;
+            } else if (!heap.containsKey(node.val)){
+                ArrayList<Integer> listIndices = new ArrayList<Integer>();
+                heap.put(node.val, listIndices);
+            }
+            heap.get(node.val).add(i);
+        }
+        
+        ListNode head = new ListNode(0);
+        ListNode tail = head;
+        
+        while (!heap.isEmpty()){
+            Map.Entry<Integer, ArrayList<Integer>> firstEntry = heap.firstEntry();
+            ArrayList<Integer> listIndices = firstEntry.getValue();
+            int listIndex = listIndices.get(0);
+            listIndices.remove(0);
+            if (listIndices.isEmpty()){
+                heap.pollFirstEntry();
+            }
+            
+            ListNode node = lists[listIndex];
+            tail.next = node;
+            tail = tail.next;
+            lists[listIndex] = node.next;
+            tail.next = null;
+            
+            node = lists[listIndex];
+            if (node==null) {
+                continue;
+            } else if (!heap.containsKey(node.val)){
+                heap.put(node.val, new ArrayList<Integer>());
+            }
+            heap.get(node.val).add(listIndex);
+        }
+        return head.next;
+        
+    }
 	
-	
+	/*
 	public ListNode mergeKLists(List<ListNode> lists) {
         if (lists.size()==0){
             return null;
@@ -75,6 +126,8 @@ public class MergekSortedLists {
             return mergeKLists((List)ln);
         }
     }
+    */
+	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
