@@ -46,18 +46,18 @@ values
 , (3.65)
 ;
 
--- A working solution:
 select * from Scores;
-select a.Score, count(b.Score)
-from Scores a, 
-(select Score
-from (
+
+-- A working solution:
+select a.Score, count(b.Score) as Rank
+from Scores a
+join
+(
 	select distinct Score 
 	from Scores 
 	order by Score desc
-	) d
 ) b 
-where a.Score<=b.Score
+on a.Score<=b.Score
 group by a.Id
 order by a.Score desc; 
 
